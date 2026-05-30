@@ -1,0 +1,70 @@
+﻿name: Daily Morning Brief
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 8 AM New York during daylight saving time.
+    - cron: "0 12 * * *"
+    # 8 AM New York during standard time.
+    - cron: "0 13 * * *"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: daily-morning-brief
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check New York hour
+        id: ny-time
+        shell: bash
+        run: |
+          hour=$(TZ=America/New_York date +%H)
+          echo "hour=$hour" >> "$GITHUB_OUTPUT"
+          echo "New York hour is $hour"
+
+      - name: Generate brief and send email
+        if: github.event_name == 'workflow_dispatch' || steps.ny-time.outputs.hour == '08'
+        env:
+          BRIEF_EMAIL_SENDER: ${{ secrets.BRIEF_EMAIL_SENDER }}
+          BRIEF_EMAIL_RECIPIENT: ${{ secrets.BRIEF_EMAIL_RECIPIENT }}
+          ICLOUD_APP_PASSWORD: ${{ secrets.ICLOUD_APP_PASSWORD }}
+        run: python daily_brief/brief.py
+
+      - name: Commit generated brief
+        if: github.event_name == 'workflow_dispatch' || steps.ny-time.outputs.hour == '08'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add DAILY_BRIEF.md DAILY_BRIEF.html morning_brief_site/index.html
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+          else
+            git commit -m "Update daily brief"
+            git push
+          fi
+      - name: Upload GitHub Pages artifact
+        if: github.event_name == 'workflow_dispatch' || steps.ny-time.outputs.hour == '08'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: morning_brief_site
+
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'workflow_dispatch' || steps.ny-time.outputs.hour == '08'
+        uses: actions/deploy-pages@v4
+

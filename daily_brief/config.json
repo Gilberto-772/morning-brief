@@ -1,0 +1,99 @@
+﻿{
+    "brief_title":  "Morning Brief",
+    "timezone":  "America/New_York",
+    "output_file":  "DAILY_BRIEF.md",
+    "html_output_file":  "DAILY_BRIEF.html",
+    "website_output_file":  "morning_brief_site/index.html",
+    "email":  {
+                  "enabled":  true,
+                  "sender":  "",
+                  "recipient":  "",
+                  "subject":  "Your Morning Brief",
+                  "smtp_server":  "smtp.mail.me.com",
+                  "smtp_port":  587,
+                  "password_env_var":  "ICLOUD_APP_PASSWORD",
+                  "sender_env_var":  "BRIEF_EMAIL_SENDER",
+                  "recipient_env_var":  "BRIEF_EMAIL_RECIPIENT"
+              },
+    "max_items_per_section":  7,
+    "market_symbols":  {
+                           "S\u0026P 500 ETF":  "spy.us",
+                           "Nasdaq 100 ETF":  "qqq.us",
+                           "Dow ETF":  "dia.us",
+                           "Russell 2000 ETF":  "iwm.us",
+                           "Gold ETF":  "gld.us",
+                           "BTC Spot":  "btcusd",
+                           "Opendoor":  "open.us",
+                           "Robinhood":  "hood.us",
+                           "Google":  "googl.us"
+                       },
+    "big_mover_limit":  8,
+    "big_mover_symbols":  {
+                              "Opendoor":  "open.us",
+                              "Robinhood":  "hood.us",
+                              "Google":  "googl.us",
+                              "Nvidia":  "nvda.us",
+                              "Tesla":  "tsla.us",
+                              "Coinbase":  "coin.us",
+                              "MicroStrategy":  "mstr.us",
+                              "Palantir":  "pltr.us",
+                              "SoFi":  "sofi.us",
+                              "AMD":  "amd.us",
+                              "Meta":  "meta.us",
+                              "Amazon":  "amzn.us",
+                              "Microsoft":  "msft.us",
+                              "Apple":  "aapl.us",
+                              "BTC Spot":  "btcusd",
+                              "Bitcoin ETF":  "ibit.us"
+                          },
+    "rss_sections":  [
+                         {
+                             "name":  "Financial News",
+                             "feeds":  [
+                                           "https://feeds.finance.yahoo.com/rss/2.0/headline?s=%5EGSPC,%5EIXIC,%5EDJI\u0026region=US\u0026lang=en-US",
+                                           "https://www.cnbc.com/id/100003114/device/rss/rss.html",
+                                           "https://www.marketwatch.com/rss/topstories"
+                                       ]
+                         },
+                         {
+                             "name":  "Breaking World News",
+                             "feeds":  [
+                                           "https://feeds.bbci.co.uk/news/world/rss.xml",
+                                           "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
+                                           "https://www.aljazeera.com/xml/rss/all.xml"
+                                       ]
+                         },
+                         {
+                             "name":  "Political Events",
+                             "feeds":  [
+                                           "https://news.google.com/rss/search?q=US%20politics%20OR%20Congress%20OR%20White%20House%20OR%20Supreme%20Court%20when%3A2d\u0026hl=en-US\u0026gl=US\u0026ceid=US:en",
+                                           "https://feeds.npr.org/1014/rss.xml",
+                                           "https://thehill.com/homenews/feed/"
+                                       ]
+                         },
+                         {
+                             "name":  "AI News",
+                             "feeds":  [
+                                           "https://openai.com/news/rss.xml",
+                                           "https://news.google.com/rss/search?q=Anthropic%20OR%20Claude%20AI%20when%3A7d\u0026hl=en-US\u0026gl=US\u0026ceid=US:en",
+                                           "https://blog.google/technology/ai/rss/",
+                                           "https://huggingface.co/blog/feed.xml",
+                                           "https://www.technologyreview.com/topic/artificial-intelligence/feed"
+                                       ]
+                         },
+                         {
+                             "name":  "New AI Models and Research",
+                             "feeds":  [
+                                           "https://news.google.com/rss/search?q=new%20AI%20model%20OR%20LLM%20released%20OR%20open%20source%20AI%20model%20when%3A7d\u0026hl=en-US\u0026gl=US\u0026ceid=US:en"
+                                       ]
+                         },
+                         {
+                             "name":  "Housing Market",
+                             "feeds":  [
+                                           "https://news.google.com/rss/search?q=US%20housing%20market%20OR%20mortgage%20rates%20when%3A2d\u0026hl=en-US\u0026gl=US\u0026ceid=US:en",
+                                           "https://www.housingwire.com/feed/",
+                                           "https://www.redfin.com/news/feed/"
+                                       ]
+                         }
+                     ]
+}

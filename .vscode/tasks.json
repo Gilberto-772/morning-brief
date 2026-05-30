@@ -1,0 +1,56 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Refresh Daily Brief",
+      "type": "shell",
+      "command": "C:\\Users\\perez\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "args": [
+        "${workspaceFolder}/daily_brief/brief.py"
+      ],
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Open Daily Brief in Browser",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "start",
+        "",
+        "${workspaceFolder}\\morning_brief_site\\index.html"
+      ],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Set iCloud Email Password",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/daily_brief/set_email_password.ps1"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
